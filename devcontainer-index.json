@@ -12,7 +12,6 @@
         {
           "id": "ghcr.io/devcontainers/features/anaconda",
           "version": "1.0.11",
-          "name": "Anaconda",
           "documentationURL": "https://github.com/devcontainers/features/tree/main/src/anaconda",
           "options": {
             "version": {
@@ -2595,7 +2594,6 @@
       "features": [
         {
           "id": "ghcr.io/joshspicer/features/mitm-proxy",
-          "name": "mitmproxy https proxy",
           "description": "mitmproxy is a free and open source, terminal-based interactive HTTP(S) proxy.",
           "version": "1.0.3",
           "options": {
