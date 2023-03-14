@@ -1,0 +1,2695 @@
+{
+  "collections": [
+    {
+      "sourceInformation": {
+        "name": "Reference Implementation Features",
+        "maintainer": "Dev Container Spec Maintainers",
+        "contact": "https://github.com/devcontainers/features/issues",
+        "repository": "https://github.com/devcontainers/features",
+        "ociReference": "ghcr.io/devcontainers/features"
+      },
+      "features": [
+        {
+          "id": "ghcr.io/devcontainers/features/anaconda",
+          "version": "1.0.11",
+          "name": "Anaconda",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/anaconda",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest"
+              ],
+              "default": "latest",
+              "description": "Select or enter an anaconda version."
+            }
+          },
+          "containerEnv": {
+            "CONDA_DIR": "/usr/local/conda",
+            "PATH": "/usr/local/conda/bin:${PATH}"
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/aws-cli",
+          "version": "1.0.6",
+          "name": "AWS CLI",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/aws-cli",
+          "description": "Installs the AWS CLI along with needed dependencies. Useful for base Dockerfiles that often are missing required install dependencies like gpg.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest"
+              ],
+              "default": "latest",
+              "description": "Select or enter an AWS CLI version."
+            }
+          },
+          "customizations": {
+            "vscode": {
+              "extensions": [
+                "AmazonWebServices.aws-toolkit-vscode"
+              ]
+            }
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/azure-cli",
+          "version": "1.0.8",
+          "name": "Azure CLI",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/azure-cli",
+          "description": "Installs the Azure CLI along with needed dependencies. Useful for base Dockerfiles that often are missing required install dependencies like gpg.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest"
+              ],
+              "default": "latest",
+              "description": "Select or enter an Azure CLI version. (Available versions may vary by Linux distribution.)"
+            },
+            "extensions": {
+              "type": "string",
+              "default": "",
+              "description": "Optional comma separated list of Azure CLI extensions to install in profile."
+            },
+            "installBicep": {
+              "type": "boolean",
+              "description": "Optionally install Azure Bicep",
+              "default": false
+            }
+          },
+          "customizations": {
+            "vscode": {
+              "extensions": [
+                "ms-vscode.azurecli"
+              ]
+            }
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/common-utils",
+          "version": "2.0.8",
+          "name": "Common Utilities",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/common-utils",
+          "description": "Installs a set of common command line utilities, Oh My Zsh!, and sets up a non-root user.",
+          "options": {
+            "installZsh": {
+              "type": "boolean",
+              "default": true,
+              "description": "Install ZSH?"
+            },
+            "configureZshAsDefaultShell": {
+              "type": "boolean",
+              "default": false,
+              "description": "Change default shell to ZSH?"
+            },
+            "installOhMyZsh": {
+              "type": "boolean",
+              "default": true,
+              "description": "Install Oh My Zsh!?"
+            },
+            "upgradePackages": {
+              "type": "boolean",
+              "default": true,
+              "description": "Upgrade OS packages?"
+            },
+            "username": {
+              "type": "string",
+              "proposals": [
+                "devcontainer",
+                "vscode",
+                "codespace",
+                "none",
+                "automatic"
+              ],
+              "default": "automatic",
+              "description": "Enter name of a non-root user to configure or none to skip"
+            },
+            "userUid": {
+              "type": "string",
+              "proposals": [
+                "1000",
+                "automatic"
+              ],
+              "default": "automatic",
+              "description": "Enter UID for non-root user"
+            },
+            "userGid": {
+              "type": "string",
+              "proposals": [
+                "1000",
+                "automatic"
+              ],
+              "default": "automatic",
+              "description": "Enter GID for non-root user"
+            },
+            "nonFreePackages": {
+              "type": "boolean",
+              "default": false,
+              "description": "Add packages from non-free Debian repository? (Debian only)"
+            }
+          },
+          "owner": "devcontainers",
+          "majorVersion": "2"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/conda",
+          "version": "1.0.8",
+          "name": "Conda",
+          "description": "A cross-platform, language-agnostic binary package manager",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/conda",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "4.11.0",
+                "4.12.0"
+              ],
+              "default": "latest",
+              "description": "Select or enter a conda version."
+            },
+            "addCondaForge": {
+              "type": "boolean",
+              "default": false,
+              "description": "Add conda-forge channel to the config?"
+            }
+          },
+          "containerEnv": {
+            "CONDA_DIR": "/opt/conda",
+            "CONDA_SCRIPT": "/opt/conda/etc/profile.d/conda.sh",
+            "PATH": "/opt/conda/bin:${PATH}"
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/desktop-lite",
+          "version": "1.0.8",
+          "name": "Light-weight Desktop",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/desktop-lite",
+          "description": "Adds a lightweight Fluxbox based desktop to the container that can be accessed using a VNC viewer or the web. GUI-based commands executed from the built-in VS code terminal will open on the desktop automatically.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest"
+              ],
+              "default": "latest",
+              "description": "Currently Unused!"
+            },
+            "noVncVersion": {
+              "type": "string",
+              "proposals": [
+                "1.2.0"
+              ],
+              "default": "1.2.0",
+              "description": "NoVnc Version"
+            },
+            "password": {
+              "type": "string",
+              "proposals": [
+                "vscode",
+                "codespaces",
+                "password"
+              ],
+              "default": "vscode",
+              "description": "Enter a password for desktop connections"
+            },
+            "webPort": {
+              "type": "string",
+              "proposals": [
+                "6080"
+              ],
+              "default": "6080",
+              "description": "Enter a port for the VNC web client"
+            },
+            "vncPort": {
+              "type": "string",
+              "proposals": [
+                "5901"
+              ],
+              "default": "5901",
+              "description": "Enter a port for the desktop VNC server"
+            }
+          },
+          "init": true,
+          "entrypoint": "/usr/local/share/desktop-init.sh",
+          "containerEnv": {
+            "DISPLAY": ":1"
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/docker-in-docker",
+          "version": "2.1.0",
+          "name": "Docker (Docker-in-Docker)",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/docker-in-docker",
+          "description": "Create child containers *inside* a container, independent from the host's docker instance. Installs Docker extension in the container along with needed CLIs.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none",
+                "20.10"
+              ],
+              "default": "latest",
+              "description": "Select or enter a Docker/Moby Engine version. (Availability can vary by OS version.)"
+            },
+            "moby": {
+              "type": "boolean",
+              "default": true,
+              "description": "Install OSS Moby build instead of Docker CE"
+            },
+            "dockerDashComposeVersion": {
+              "type": "string",
+              "enum": [
+                "v1",
+                "v2"
+              ],
+              "default": "v1",
+              "description": "Default version of Docker Compose (v1 or v2)"
+            },
+            "azureDnsAutoDetection": {
+              "type": "boolean",
+              "default": true,
+              "description": "Allow automatically setting the dockerd DNS server when the installation script detects it is running in Azure"
+            },
+            "dockerDefaultAddressPool": {
+              "type": "string",
+              "default": "",
+              "proposals": [],
+              "description": "Define default address pools for Docker networks. e.g. base=192.168.0.0/16,size=24"
+            },
+            "installDockerBuildx": {
+              "type": "boolean",
+              "default": true,
+              "description": "Install Docker Buildx"
+            }
+          },
+          "entrypoint": "/usr/local/share/docker-init.sh",
+          "privileged": true,
+          "containerEnv": {
+            "DOCKER_BUILDKIT": "1"
+          },
+          "customizations": {
+            "vscode": {
+              "extensions": [
+                "ms-azuretools.vscode-docker"
+              ]
+            }
+          },
+          "mounts": [
+            {
+              "source": "dind-var-lib-docker-${devcontainerId}",
+              "target": "/var/lib/docker",
+              "type": "volume"
+            }
+          ],
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "2"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/docker-outside-of-docker",
+          "version": "1.1.0",
+          "name": "Docker (docker-outside-of-docker)",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/docker-outside-of-docker",
+          "description": "Re-use the host docker socket, adding the Docker CLI to a container. Feature invokes a script to enable using a forwarded Docker socket within a container to run Docker commands.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none",
+                "20.10"
+              ],
+              "default": "latest",
+              "description": "Select or enter a Docker/Moby CLI version. (Availability can vary by OS version.)"
+            },
+            "moby": {
+              "type": "boolean",
+              "default": true,
+              "description": "Install OSS Moby build instead of Docker CE"
+            },
+            "dockerDashComposeVersion": {
+              "type": "string",
+              "enum": [
+                "v1",
+                "v2"
+              ],
+              "default": "v1",
+              "description": "Compose version to use for docker-compose (v1 or v2)"
+            },
+            "installDockerBuildx": {
+              "type": "boolean",
+              "default": true,
+              "description": "Install Docker Buildx"
+            }
+          },
+          "entrypoint": "/usr/local/share/docker-init.sh",
+          "containerEnv": {
+            "DOCKER_BUILDKIT": "1"
+          },
+          "customizations": {
+            "vscode": {
+              "extensions": [
+                "ms-azuretools.vscode-docker"
+              ]
+            }
+          },
+          "mounts": [
+            {
+              "source": "/var/run/docker.sock",
+              "target": "/var/run/docker-host.sock",
+              "type": "bind"
+            }
+          ],
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "legacyIds": [
+            "docker-from-docker"
+          ],
+          "currentId": "docker-outside-of-docker",
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/dotnet",
+          "version": "1.1.3",
+          "name": "Dotnet CLI",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/dotnet",
+          "description": "Installs the .NET CLI. Provides option of installing sdk or runtime, and option of versions to install. Uses latest version of .NET sdk as defaults to install.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "7",
+                "6",
+                "3.1"
+              ],
+              "default": "latest",
+              "description": "Select or enter a dotnet CLI version. (Available versions may vary by Linux distribution.)"
+            },
+            "runtimeOnly": {
+              "type": "boolean",
+              "default": false,
+              "description": "Install just the dotnet runtime if true, and sdk if false."
+            },
+            "installUsingApt": {
+              "type": "boolean",
+              "default": true,
+              "description": "If true, it installs using apt instead of the release URL"
+            }
+          },
+          "containerEnv": {
+            "DOTNET_ROOT": "/usr/local/dotnet/current",
+            "PATH": "/usr/local/dotnet/current:${PATH}"
+          },
+          "customizations": {
+            "vscode": {
+              "extensions": [
+                "ms-dotnettools.csharp"
+              ]
+            }
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/git",
+          "version": "1.1.5",
+          "name": "Git (from source)",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/git",
+          "description": "Install an up-to-date version of Git, built from source as needed. Useful for when you want the latest and greatest features. Auto-detects latest stable version and installs needed dependencies.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "os-provided"
+              ],
+              "default": "os-provided",
+              "description": "Select or enter a Git version."
+            },
+            "ppa": {
+              "type": "boolean",
+              "default": true,
+              "description": "Install from PPA if available"
+            }
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/git-lfs",
+          "version": "1.0.7",
+          "name": "Git Large File Support (LFS)",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/git-lfs",
+          "description": "Installs Git Large File Support (Git LFS) along with needed dependencies. Useful for base Dockerfiles that often are missing required install dependencies like git and curl.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none"
+              ],
+              "default": "latest",
+              "description": "Select version of Git LFS to install"
+            }
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/github-cli",
+          "version": "1.0.10",
+          "name": "GitHub CLI",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/github-cli",
+          "description": "Installs the GitHub CLI. Auto-detects latest version and installs needed dependencies.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none"
+              ],
+              "default": "latest",
+              "description": "Select version of the GitHub CLI, if not latest."
+            },
+            "installDirectlyFromGitHubRelease": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils",
+            "ghcr.io/devcontainers/features/git"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/go",
+          "version": "1.1.3",
+          "name": "Go",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/go",
+          "description": "Installs Go and common Go utilities. Auto-detects latest version and installs needed dependencies.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none",
+                "1.19",
+                "1.18"
+              ],
+              "default": "latest",
+              "description": "Select or enter a Go version to install"
+            },
+            "golangciLintVersion": {
+              "type": "string",
+              "default": "latest",
+              "description": "Version of golangci-lint to install"
+            }
+          },
+          "init": true,
+          "customizations": {
+            "vscode": {
+              "extensions": [
+                "golang.Go"
+              ]
+            }
+          },
+          "containerEnv": {
+            "GOROOT": "/usr/local/go",
+            "GOPATH": "/go",
+            "PATH": "/usr/local/go/bin:/go/bin:${PATH}"
+          },
+          "capAdd": [
+            "SYS_PTRACE"
+          ],
+          "securityOpt": [
+            "seccomp=unconfined"
+          ],
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/hugo",
+          "version": "1.1.2",
+          "name": "Hugo",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/hugo",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest"
+              ],
+              "default": "latest",
+              "description": "Select or enter a version."
+            },
+            "extended": {
+              "type": "boolean",
+              "default": false,
+              "description": "Install Hugo extended for SASS/SCSS changes"
+            }
+          },
+          "containerEnv": {
+            "HUGO_DIR": "/usr/local/hugo",
+            "PATH": "/usr/local/hugo/bin:${PATH}"
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/java",
+          "version": "1.2.1",
+          "name": "Java (via SDKMAN!)",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/java",
+          "description": "Installs Java, SDKMAN! (if not installed), and needed dependencies.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none",
+                "17",
+                "11",
+                "8"
+              ],
+              "default": "latest",
+              "description": "Select or enter a Java version to install"
+            },
+            "jdkDistro": {
+              "type": "string",
+              "proposals": [
+                "ms",
+                "open",
+                "oracle",
+                "tem"
+              ],
+              "default": "ms",
+              "description": "Select or enter a JDK distribution"
+            },
+            "installGradle": {
+              "type": "boolean",
+              "default": false,
+              "description": "Install Gradle, a build automation tool for multi-language software development"
+            },
+            "gradleVersion": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "7.5.1",
+                "6.9.3",
+                "5.6.4"
+              ],
+              "default": "latest",
+              "description": "Select or enter a Gradle version"
+            },
+            "installMaven": {
+              "type": "boolean",
+              "default": false,
+              "description": "Install Maven, a management tool for Java"
+            },
+            "mavenVersion": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "3.8.6",
+                "3.6.3",
+                "3.5.4"
+              ],
+              "default": "latest",
+              "description": "Select or enter a Maven version"
+            },
+            "installAnt": {
+              "type": "boolean",
+              "default": false,
+              "description": "Install Ant, a software tool for automating software build processes"
+            },
+            "antVersion": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "1.10.12",
+                "1.9.15"
+              ],
+              "default": "latest",
+              "description": "Select or enter an Ant version"
+            }
+          },
+          "customizations": {
+            "vscode": {
+              "extensions": [
+                "vscjava.vscode-java-pack"
+              ],
+              "settings": {
+                "java.import.gradle.java.home": "/usr/local/sdkman/candidates/java/current"
+              }
+            }
+          },
+          "containerEnv": {
+            "SDKMAN_DIR": "/usr/local/sdkman",
+            "JAVA_HOME": "/usr/local/sdkman/candidates/java/current",
+            "PATH": "/usr/local/sdkman/bin:/usr/local/sdkman/candidates/java/current/bin:/usr/local/sdkman/candidates/gradle/current/bin:/usr/local/sdkman/candidates/maven/current/bin:/usr/local/sdkman/candidates/ant/current/bin:${PATH}"
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/kubectl-helm-minikube",
+          "version": "1.1.4",
+          "name": "Kubectl, Helm, and Minikube",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/kubectl-helm-minikube",
+          "description": "Installs latest version of kubectl, Helm, and optionally minikube. Auto-detects latest versions and installs needed dependencies.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none",
+                "1.23",
+                "1.22",
+                "1.21",
+                "none"
+              ],
+              "default": "latest",
+              "description": "Select or enter a Kubernetes version to install"
+            },
+            "helm": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none"
+              ],
+              "default": "latest",
+              "description": "Select or enter a Helm version to install"
+            },
+            "minikube": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none"
+              ],
+              "default": "latest",
+              "description": "Select or enter a Minikube version to install"
+            }
+          },
+          "mounts": [
+            {
+              "source": "minikube-config",
+              "target": "/home/vscode/.minikube",
+              "type": "volume"
+            }
+          ],
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/nix",
+          "version": "1.1.3",
+          "name": "Nix Package Manager",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/nix",
+          "description": "Installs the Nix package manager and optionally a set of packages.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "2.11"
+              ],
+              "default": "latest",
+              "description": "Version of Nix to install."
+            },
+            "multiUser": {
+              "type": "boolean",
+              "default": true,
+              "description": "Perform a multi-user install (instead of single user)"
+            },
+            "packages": {
+              "type": "string",
+              "default": "",
+              "description": "Optional comma separated list of Nix packages to install in profile."
+            },
+            "flakeUri": {
+              "type": "string",
+              "default": "",
+              "description": "Optional URI to a Nix Flake to install in profile."
+            },
+            "extraNixConfig": {
+              "type": "string",
+              "default": "",
+              "description": "Optional comma separated list of extra lines to add to /etc/nix/nix.conf."
+            }
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "containerEnv": {
+            "PATH": "/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:${PATH}"
+          },
+          "entrypoint": "/usr/local/share/nix-entrypoint.sh",
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/node",
+          "version": "1.2.0",
+          "name": "Node.js (via nvm), yarn and pnpm",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/node",
+          "description": "Installs Node.js, nvm, yarn, pnpm, and needed dependencies.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "lts",
+                "latest",
+                "none",
+                "18",
+                "16",
+                "14"
+              ],
+              "default": "lts",
+              "description": "Select or enter a Node.js version to install"
+            },
+            "nodeGypDependencies": {
+              "type": "boolean",
+              "default": true,
+              "description": "Install dependencies to compile native node modules (node-gyp)?"
+            },
+            "nvmInstallPath": {
+              "type": "string",
+              "default": "/usr/local/share/nvm",
+              "description": "The path where NVM will be installed."
+            },
+            "nvmVersion": {
+              "type": "string",
+              "default": "0.39.2",
+              "description": "Version of NVM to install."
+            }
+          },
+          "customizations": {
+            "vscode": {
+              "extensions": [
+                "dbaeumer.vscode-eslint"
+              ]
+            }
+          },
+          "containerEnv": {
+            "NVM_DIR": "/usr/local/share/nvm",
+            "NVM_SYMLINK_CURRENT": "true",
+            "PATH": "/usr/local/share/nvm/current/bin:${PATH}"
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/nvidia-cuda",
+          "version": "1.0.7",
+          "name": "NVIDIA CUDA",
+          "description": "Installs shared libraries for NVIDIA CUDA.",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/nvidia-cuda",
+          "options": {
+            "installCudnn": {
+              "type": "boolean",
+              "default": false,
+              "description": "Additionally install CUDA Deep Neural Network (cuDNN) shared library"
+            },
+            "installNvtx": {
+              "type": "boolean",
+              "default": false,
+              "description": "Additionally install NVIDIA Tools Extension (NVTX)"
+            },
+            "cudaVersion": {
+              "type": "string",
+              "proposals": [
+                "11.8",
+                "11.7",
+                "11.6",
+                "11.5",
+                "11.4",
+                "11.3",
+                "11.2"
+              ],
+              "default": "11.8",
+              "description": "Version of CUDA to install"
+            },
+            "cudnnVersion": {
+              "type": "string",
+              "proposals": [
+                "8.6.0.163",
+                "8.5.0.96",
+                "8.4.1.50",
+                "8.4.0.27",
+                "8.3.3.40",
+                "8.3.2.44",
+                "8.3.1.22",
+                "8.3.0.98",
+                "8.2.4.15",
+                "8.2.2.26",
+                "8.2.1.32",
+                "8.2.0.53",
+                "8.1.1.33",
+                "8.1.0.77"
+              ],
+              "default": "8.6.0.163",
+              "description": "Version of cuDNN to install"
+            }
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/oryx",
+          "version": "1.0.13",
+          "name": "Oryx",
+          "description": "Installs the oryx CLI",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/oryx",
+          "containerEnv": {
+            "ORYX_SDK_STORAGE_BASE_URL": "https://oryx-cdn.microsoft.io",
+            "ENABLE_DYNAMIC_INSTALL": "true",
+            "DYNAMIC_INSTALL_ROOT_DIR": "/opt",
+            "ORYX_PREFER_USER_INSTALLED_SDKS": "true",
+            "ORYX_DIR": "/usr/local/oryx",
+            "DEBIAN_FLAVOR": "focal-scm",
+            "PATH": "/usr/local/oryx:${PATH}"
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/php",
+          "version": "1.1.2",
+          "name": "PHP",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/php",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "8",
+                "8.2",
+                "8.2.0",
+                "none"
+              ],
+              "default": "latest",
+              "description": "Select or enter a PHP version"
+            },
+            "installComposer": {
+              "type": "boolean",
+              "default": true,
+              "description": "Install PHP Composer?"
+            }
+          },
+          "customizations": {
+            "vscode": {
+              "extensions": [
+                "xdebug.php-debug",
+                "bmewburn.vscode-intelephense-client",
+                "xdebug.php-pack",
+                "devsense.phptools-vscode"
+              ]
+            }
+          },
+          "containerEnv": {
+            "PHP_PATH": "/usr/local/php/current",
+            "PATH": "/usr/local/php/current/bin:${PATH}"
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/powershell",
+          "version": "1.1.0",
+          "name": "PowerShell",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/powershell",
+          "description": "Installs PowerShell along with needed dependencies. Useful for base Dockerfiles that often are missing required install dependencies like gpg.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none",
+                "7.1"
+              ],
+              "default": "latest",
+              "description": "Select or enter a version of PowerShell."
+            },
+            "modules": {
+              "type": "string",
+              "default": "",
+              "description": "Optional comma separated list of PowerShell modules to install."
+            }
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/python",
+          "version": "1.0.22",
+          "name": "Python",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/python",
+          "description": "Installs the provided version of Python, as well as PIPX, and other common Python utilities.  JupyterLab is conditionally installed with the python feature. Note: May require source code compilation.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "os-provided",
+                "none",
+                "3.11",
+                "3.10",
+                "3.9",
+                "3.8",
+                "3.7",
+                "3.6"
+              ],
+              "default": "os-provided",
+              "description": "Select a Python version to install."
+            },
+            "installTools": {
+              "type": "boolean",
+              "default": true,
+              "description": "Install common Python tools like pylint"
+            },
+            "optimize": {
+              "type": "boolean",
+              "default": false,
+              "description": "Optimize Python for performance when compiled (slow)"
+            },
+            "installPath": {
+              "type": "string",
+              "default": "/usr/local/python",
+              "description": "The path where python will be installed."
+            },
+            "installJupyterlab": {
+              "type": "boolean",
+              "default": false,
+              "description": "Install JupyterLab, a web-based interactive development environment for notebooks"
+            },
+            "configureJupyterlabAllowOrigin": {
+              "type": "string",
+              "default": "",
+              "description": "Configure JupyterLab to accept HTTP requests from the specified origin"
+            }
+          },
+          "containerEnv": {
+            "PYTHON_PATH": "/usr/local/python/current",
+            "PIPX_HOME": "/usr/local/py-utils",
+            "PIPX_BIN_DIR": "/usr/local/py-utils/bin",
+            "PATH": "/usr/local/python/current/bin:/usr/local/py-utils/bin:${PATH}"
+          },
+          "customizations": {
+            "vscode": {
+              "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance"
+              ],
+              "settings": {
+                "python.defaultInterpreterPath": "/usr/local/python/current/bin/python",
+                "python.formatting.autopep8Path": "/usr/local/py-utils/bin/autopep8",
+                "python.formatting.blackPath": "/usr/local/py-utils/bin/black",
+                "python.linting.flake8Path": "/usr/local/py-utils/bin/flake8",
+                "python.linting.flake8Enabled": false,
+                "python.linting.mypyPath": "/usr/local/py-utils/bin/mypy",
+                "python.linting.mypyEnabled": false,
+                "python.linting.pylintPath": "/usr/local/py-utils/bin/pylint",
+                "python.linting.pylintEnabled": false
+              }
+            }
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils",
+            "ghcr.io/devcontainers/features/oryx"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/ruby",
+          "version": "1.0.9",
+          "name": "Ruby (via rvm)",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/ruby",
+          "description": "Installs Ruby, rvm, rbenv, common Ruby utilities, and needed dependencies.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none",
+                "3.1",
+                "3.0",
+                "2.7"
+              ],
+              "default": "latest",
+              "description": "Select or enter a Ruby version to install"
+            }
+          },
+          "customizations": {
+            "vscode": {
+              "extensions": [
+                "rebornix.Ruby"
+              ]
+            }
+          },
+          "containerEnv": {
+            "GEM_PATH": "/usr/local/rvm/gems/default:/usr/local/rvm/gems/default@global",
+            "GEM_HOME": "/usr/local/rvm/gems/default",
+            "MY_RUBY_HOME": "/usr/local/rvm/rubies/default",
+            "PATH": "/usr/local/rvm/gems/default/bin:/usr/local/rvm/gems/default@global/bin:/usr/local/rvm/rubies/default/bin:/usr/local/share/rbenv/bin:${PATH}"
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/rust",
+          "version": "1.0.11",
+          "name": "Rust",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/rust",
+          "description": "Installs Rust, common Rust utilities, and their required dependencies",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none",
+                "1.63",
+                "1.62",
+                "1.61"
+              ],
+              "default": "latest",
+              "description": "Select or enter a version of Rust to install."
+            },
+            "profile": {
+              "type": "string",
+              "proposals": [
+                "minimal",
+                "default",
+                "complete"
+              ],
+              "default": "minimal",
+              "description": "Select a rustup install profile."
+            }
+          },
+          "customizations": {
+            "vscode": {
+              "extensions": [
+                "vadimcn.vscode-lldb",
+                "mutantdino.resourcemonitor",
+                "rust-lang.rust-analyzer",
+                "tamasfe.even-better-toml",
+                "serayuzgur.crates"
+              ],
+              "settings": {
+                "files.watcherExclude": {
+                  "**/target/**": true
+                }
+              }
+            }
+          },
+          "containerEnv": {
+            "CARGO_HOME": "/usr/local/cargo",
+            "RUSTUP_HOME": "/usr/local/rustup",
+            "PATH": "/usr/local/cargo/bin:${PATH}"
+          },
+          "capAdd": [
+            "SYS_PTRACE"
+          ],
+          "securityOpt": [
+            "seccomp=unconfined"
+          ],
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/sshd",
+          "version": "1.0.9",
+          "name": "SSH server",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/sshd",
+          "description": "Adds a SSH server into a container so that you can use an external terminal, sftp, or SSHFS to interact with it.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest"
+              ],
+              "default": "latest",
+              "description": "Currently unused."
+            }
+          },
+          "entrypoint": "/usr/local/share/ssh-init.sh",
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        },
+        {
+          "id": "ghcr.io/devcontainers/features/terraform",
+          "version": "1.3.0",
+          "name": "Terraform, tflint, and TFGrunt",
+          "documentationURL": "https://github.com/devcontainers/features/tree/main/src/terraform",
+          "description": "Installs the Terraform CLI and optionally TFLint and Terragrunt. Auto-detects latest version and installs needed dependencies.",
+          "options": {
+            "version": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none",
+                "1.1",
+                "1.0",
+                "0.15"
+              ],
+              "default": "latest",
+              "description": "Terraform version"
+            },
+            "tflint": {
+              "type": "string",
+              "proposals": [
+                "latest"
+              ],
+              "default": "latest",
+              "description": "Tflint version"
+            },
+            "terragrunt": {
+              "type": "string",
+              "proposals": [
+                "latest"
+              ],
+              "default": "latest",
+              "description": "Terragrunt version"
+            },
+            "installSentinel": {
+              "type": "boolean",
+              "default": false,
+              "description": "Install sentinel, a language and framework for policy built to be embedded in existing software to enable fine-grained, logic-based policy decisions"
+            },
+            "installTFsec": {
+              "type": "boolean",
+              "default": false,
+              "description": "Install tfsec, a tool to spot potential misconfigurations for your terraform code"
+            },
+            "installTerraformDocs": {
+              "type": "boolean",
+              "default": false,
+              "description": "Install terraform-docs, a utility to generate documentation from Terraform modules"
+            },
+            "httpProxy": {
+              "type": "string",
+              "default": "",
+              "description": "Connect to a keyserver using a proxy by configuring this option"
+            }
+          },
+          "customizations": {
+            "vscode": {
+              "extensions": [
+                "HashiCorp.terraform",
+                "ms-azuretools.vscode-azureterraform"
+              ],
+              "settings": {
+                "terraform.languageServer.enable": true,
+                "terraform.languageServer.args": [
+                  "serve"
+                ],
+                "azureTerraform.terminal": "integrated"
+              }
+            }
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers",
+          "majorVersion": "1"
+        }
+      ],
+      "templates": []
+    },
+    {
+      "sourceInformation": {
+        "name": "Reference Implementation Templates",
+        "maintainer": "Dev Container Spec Maintainers",
+        "contact": "https://github.com/devcontainers/templates/issues",
+        "repository": "https://github.com/devcontainers/templates",
+        "ociReference": "ghcr.io/devcontainers/templates"
+      },
+      "templates": [
+        {
+          "id": "ghcr.io/devcontainers/templates/alpine",
+          "version": "1.1.1",
+          "name": "Alpine",
+          "description": "Simple Alpine container with Git installed.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/alpine",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Alpine version:",
+              "proposals": [
+                "3.17",
+                "3.16",
+                "3.15",
+                "3.14"
+              ],
+              "default": "3.17"
+            }
+          },
+          "platforms": [
+            "Any"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/anaconda",
+          "version": "1.1.1",
+          "name": "Anaconda (Python 3)",
+          "description": "Develop Anaconda applications in Python3. Installs dependencies from your environment.yml file and the Python extension.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/anaconda",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "platforms": [
+            "Python",
+            "Anaconda"
+          ],
+          "type": "dockerfile",
+          "fileCount": 6,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/anaconda-postgres",
+          "version": "1.1.3",
+          "name": "Anaconda (Python 3) & PostgreSQL",
+          "description": "Develop Anaconda & PostgreSQL applications in Python3. Installs dependencies from your environment.yml file and the Python extension.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/anaconda-postgres",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "platforms": [
+            "Python",
+            "Anaconda"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 9,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/cpp",
+          "version": "1.0.3",
+          "name": "C++",
+          "description": "Develop C++ applications on Linux. Includes Debian C++ build tools.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/cpp",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Debian / Ubuntu version (use Debian 11, Ubuntu 18.04/22.04 on local arm64/Apple Silicon):",
+              "proposals": [
+                "debian-11",
+                "debian-10",
+                "ubuntu-22.04",
+                "ubuntu-20.04",
+                "ubuntu-18.04"
+              ],
+              "default": "debian-11"
+            },
+            "reinstallCmakeVersionFromSource": {
+              "type": "string",
+              "description": "Install CMake version different from what base image has already installed.",
+              "proposals": [
+                "none",
+                "3.21.5",
+                "3.22.2"
+              ],
+              "default": "none"
+            }
+          },
+          "platforms": [
+            "C++"
+          ],
+          "type": "dockerfile",
+          "fileCount": 6,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/cpp-mariadb",
+          "version": "1.0.5",
+          "name": "C++ & MariaDB",
+          "description": "Develop C++ applications on Linux. Includes Debian C++ build tools.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/cpp-mariadb",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Debian / Ubuntu version (use Debian 11, Ubuntu 18.04/22.04 on local arm64/Apple Silicon):",
+              "proposals": [
+                "debian-11",
+                "debian-10",
+                "ubuntu-22.04",
+                "ubuntu-20.04",
+                "ubuntu-18.04"
+              ],
+              "default": "debian-11"
+            },
+            "reinstallCmakeVersionFromSource": {
+              "type": "string",
+              "description": "Install CMake version different from what base image has already installed.",
+              "proposals": [
+                "none",
+                "3.21.5",
+                "3.22.2"
+              ],
+              "default": "none"
+            }
+          },
+          "platforms": [
+            "C++"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 9,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/debian",
+          "version": "1.0.5",
+          "name": "Debian",
+          "description": "Simple Debian container with Git installed.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/debian",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Debian version (use bullseye on local arm64/Apple Silicon):",
+              "proposals": [
+                "bullseye",
+                "buster"
+              ],
+              "default": "bullseye"
+            }
+          },
+          "platforms": [
+            "Any"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/docker-existing-docker-compose",
+          "version": "1.1.2",
+          "name": "Existing Docker Compose (Extend)",
+          "description": "Sample illustrating how to extend an existing Docker Compose file for use in a dev container.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "platforms": [
+            "Any"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/docker-existing-dockerfile",
+          "version": "1.2.1",
+          "name": "Existing Dockerfile",
+          "description": "Sample illustrating reuse of an existing Dockefile.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "platforms": [
+            "Any"
+          ],
+          "type": "dockerfile",
+          "fileCount": 3,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/docker-in-docker",
+          "version": "1.2.0",
+          "name": "Docker in Docker",
+          "description": "Create child containers _inside_ a container, independent from the host's docker instance. Installs Docker extension in the container along with needed CLIs.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/docker-in-docker",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "installZsh": {
+              "type": "boolean",
+              "description": "Install ZSH!?",
+              "default": "true"
+            },
+            "upgradePackages": {
+              "type": "boolean",
+              "description": "Upgrade OS packages?",
+              "default": "false"
+            },
+            "dockerVersion": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none",
+                "20.10"
+              ],
+              "default": "latest",
+              "description": "Select or enter a Docker/Moby CLI version. (Availability can vary by OS version.)"
+            },
+            "moby": {
+              "type": "boolean",
+              "default": "true",
+              "description": "Install OSS Moby build instead of Docker CE"
+            },
+            "enableNonRootDocker": {
+              "type": "boolean",
+              "description": "Enable non-root user to access Docker in container?",
+              "default": "true"
+            }
+          },
+          "platforms": [
+            "Any"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [
+            "ghcr.io/devcontainers/features/docker-in-docker"
+          ],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/docker-outside-of-docker",
+          "version": "1.2.0",
+          "name": "Docker outside of Docker",
+          "description": "Access your host's Docker install from inside a dev container. Installs Docker extension in the container along with needed CLIs.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/docker-outside-of-docker",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "installZsh": {
+              "type": "boolean",
+              "description": "Install ZSH!?",
+              "default": "true"
+            },
+            "upgradePackages": {
+              "type": "boolean",
+              "description": "Upgrade OS packages?",
+              "default": "false"
+            },
+            "dockerVersion": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none",
+                "20.10"
+              ],
+              "default": "latest",
+              "description": "Select or enter a Docker/Moby CLI version. (Availability can vary by OS version.)"
+            },
+            "moby": {
+              "type": "boolean",
+              "default": "true",
+              "description": "Install OSS Moby build instead of Docker CE"
+            },
+            "enableNonRootDocker": {
+              "type": "boolean",
+              "description": "Enable non-root Docker access in container?",
+              "default": "true"
+            }
+          },
+          "platforms": [
+            "Any"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [
+            "ghcr.io/devcontainers/features/docker-outside-of-docker"
+          ],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/docker-outside-of-docker-compose",
+          "version": "2.2.0",
+          "name": "Docker outside of Docker Compose",
+          "description": "Access your host's Docker install from inside a container when using Docker Compose. Installs Docker extension in the container along with needed CLIs.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/docker-outside-of-docker-compose",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "installZsh": {
+              "type": "boolean",
+              "description": "Install ZSH?",
+              "default": "true"
+            },
+            "upgradePackages": {
+              "type": "boolean",
+              "description": "Upgrade OS packages?",
+              "default": "false"
+            },
+            "dockerVersion": {
+              "type": "string",
+              "proposals": [
+                "latest",
+                "none",
+                "20.10"
+              ],
+              "default": "latest",
+              "description": "Select or enter a Docker/Moby CLI version. (Availability can vary by OS version.)"
+            },
+            "moby": {
+              "type": "boolean",
+              "default": "true",
+              "description": "Install OSS Moby build instead of Docker CE"
+            },
+            "enableNonRootDocker": {
+              "type": "boolean",
+              "description": "Enable non-root Docker access in container?",
+              "default": "true"
+            }
+          },
+          "platforms": [
+            "Any"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 6,
+          "featureIds": [
+            "ghcr.io/devcontainers/features/docker-outside-of-docker"
+          ],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/dotnet",
+          "version": "1.2.5",
+          "name": "C# (.NET)",
+          "description": "Develop C# and .NET based applications. Includes all needed SDKs, extensions, and dependencies.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/dotnet",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": ".NET version:",
+              "proposals": [
+                "7.0",
+                "6.0",
+                "7.0-bullseye",
+                "6.0-bullseye",
+                "7.0-jammy",
+                "6.0-jammy",
+                "6.0-focal"
+              ],
+              "default": "7.0"
+            }
+          },
+          "platforms": [
+            ".NET",
+            ".NET Core",
+            "C#"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/dotnet-fsharp",
+          "version": "1.1.2",
+          "name": "F# (.NET)",
+          "description": "Develop F# and .NET based applications. Includes all needed SDKs, extensions, and dependencies.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/dotnet-fsharp",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "platforms": [
+            ".NET",
+            ".NET Core",
+            "F#"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/dotnet-mssql",
+          "version": "1.2.6",
+          "name": "C# (.NET) and MS SQL",
+          "description": "Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, dependencies and an MS SQL container for parallel database development. Adds an additional MS SQL container to the C# (.NET Core) container definition and deploys any .dacpac files from the mssql .devcontainer folder.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/dotnet-mssql",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": ".NET version:",
+              "proposals": [
+                "7.0",
+                "6.0",
+                "7.0-bullseye",
+                "6.0-bullseye",
+                "7.0-jammy",
+                "6.0-jammy",
+                "6.0-focal"
+              ],
+              "default": "7.0"
+            }
+          },
+          "platforms": [
+            ".NET",
+            ".NET Core",
+            "C#",
+            "Microsoft SQL"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 9,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/dotnet-postgres",
+          "version": "1.3.2",
+          "name": "C# (.NET) and PostgreSQL",
+          "description": "Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, dependencies and a PostgreSQL container for parallel database development. Adds an additional PostgreSQL container to the C# (.NET Core) container definition.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/dotnet-postgres",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": ".NET version:",
+              "proposals": [
+                "7.0",
+                "6.0",
+                "7.0-bullseye",
+                "6.0-bullseye",
+                "7.0-jammy",
+                "6.0-jammy",
+                "6.0-focal"
+              ],
+              "default": "7.0"
+            }
+          },
+          "platforms": [
+            ".NET",
+            ".NET Core",
+            "C#",
+            "PostgreSQL"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 6,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/go",
+          "version": "1.2.1",
+          "name": "Go",
+          "description": "Develop Go based applications. Includes appropriate runtime args, Go, common tools, extensions, and dependencies.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/go",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Go version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "1",
+                "1.20",
+                "1.19",
+                "1.18",
+                "1-bullseye",
+                "1.20-bullseye",
+                "1.19-bullseye",
+                "1.18-bullseye",
+                "1-buster",
+                "1.20-buster",
+                "1.19-buster",
+                "1.18-buster"
+              ],
+              "default": "1-bullseye"
+            }
+          },
+          "platforms": [
+            "Go"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/go-postgres",
+          "version": "1.2.2",
+          "name": "Go & PostgreSQL",
+          "description": "Use and develop Go + Postgres applications. Includes appropriate runtime args, Go, common tools, extensions, and dependencies.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/go-postgres",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Go version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "1",
+                "1.20",
+                "1.19",
+                "1.18",
+                "1-bullseye",
+                "1.20-bullseye",
+                "1.19-bullseye",
+                "1.18-bullseye",
+                "1-buster",
+                "1.20-buster",
+                "1.19-buster",
+                "1.18-buster"
+              ],
+              "default": "1-bullseye"
+            }
+          },
+          "platforms": [
+            "Go"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 7,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/java",
+          "version": "1.3.0",
+          "name": "Java",
+          "description": "Develop Java applications. Includes the JDK and Java extensions.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/java",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Java version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "8",
+                "11",
+                "17",
+                "8-bullseye",
+                "11-bullseye",
+                "17-bullseye",
+                "8-buster",
+                "11-buster",
+                "17-buster"
+              ],
+              "default": "17"
+            },
+            "installMaven": {
+              "type": "boolean",
+              "description": "Install Maven, a management tool for Java",
+              "default": "false"
+            },
+            "installGradle": {
+              "type": "boolean",
+              "description": "Install Gradle, a build automation tool for multi-language software development",
+              "default": "false"
+            }
+          },
+          "platforms": [
+            "Java"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [
+            "ghcr.io/devcontainers/features/java"
+          ],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/java-postgres",
+          "version": "1.2.1",
+          "name": "Java & PostgreSQL",
+          "description": "Develop applications with Java and PostgreSQL. Includes a Java application container and PostgreSQL server.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/java-postgres",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Java version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "8",
+                "11",
+                "17",
+                "8-bullseye",
+                "11-bullseye",
+                "17-bullseye",
+                "8-buster",
+                "11-buster",
+                "17-buster"
+              ],
+              "default": "17"
+            },
+            "installMaven": {
+              "type": "boolean",
+              "description": "Install Maven, a management tool for Java",
+              "default": "false"
+            },
+            "installGradle": {
+              "type": "boolean",
+              "description": "Install Gradle, a build automation tool for multi-language software development",
+              "default": "false"
+            }
+          },
+          "platforms": [
+            "Java"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 6,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/javascript-node",
+          "version": "1.1.1",
+          "name": "Node.js & JavaScript",
+          "description": "Develop Node.js based applications. Includes Node.js, eslint, nvm, and yarn.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/javascript-node",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Node.js version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "18",
+                "16",
+                "14",
+                "18-bullseye",
+                "16-bullseye",
+                "14-bullseye",
+                "18-buster",
+                "16-buster",
+                "14-buster"
+              ],
+              "default": "18"
+            }
+          },
+          "platforms": [
+            "Node.js",
+            "JavaScript"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/javascript-node-mongo",
+          "version": "1.1.1",
+          "name": "Node.js & Mongo DB",
+          "description": "Develop applications in Node.js and Mongo DB. Includes Node.js, eslint, and yarn in a container linked to a Mongo DB.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/javascript-node-mongo",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Node.js version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "18",
+                "16",
+                "14",
+                "18-bullseye",
+                "16-bullseye",
+                "14-bullseye",
+                "18-buster",
+                "16-buster",
+                "14-buster"
+              ],
+              "default": "18"
+            }
+          },
+          "platforms": [
+            "Node.js",
+            "JavaScript",
+            "Mongo DB"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 6,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/javascript-node-postgres",
+          "version": "1.1.1",
+          "name": "Node.js & PostgreSQL",
+          "description": "Develop applications in Node.js and PostgreSQL. Includes Node.js, eslint, and yarn in a container linked to a Postgres DB container",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/javascript-node-postgres",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Node.js version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "18",
+                "16",
+                "14",
+                "18-bullseye",
+                "16-bullseye",
+                "14-bullseye",
+                "18-buster",
+                "16-buster",
+                "14-buster"
+              ],
+              "default": "18"
+            }
+          },
+          "platforms": [
+            "Node.js",
+            "JavaScript",
+            "PostgreSQL DB"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 6,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/jekyll",
+          "version": "1.1.4",
+          "name": "Jekyll",
+          "description": "Develop static sites with Jekyll, includes everything you need to get up and running.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/jekyll",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Debian OS version (use bullseye on local arm64/Apple Silicon):",
+              "proposals": [
+                "bullseye",
+                "buster"
+              ],
+              "default": "bullseye"
+            }
+          },
+          "platforms": [
+            "Ruby",
+            "Jekyll"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/kubernetes-helm",
+          "version": "1.3.0",
+          "name": "Kubernetes - Local Configuration",
+          "description": "Access a local (or remote) Kubernetes cluster from inside a dev container using your local config. Includes kubectl, Helm, and the Docker CLI.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/kubernetes-helm",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "platforms": [
+            "Any"
+          ],
+          "type": "image",
+          "fileCount": 10,
+          "featureIds": [
+            "ghcr.io/devcontainers/features/docker-outside-of-docker",
+            "ghcr.io/devcontainers/features/kubectl-helm-minikube",
+            "./local-features/copy-kube-config"
+          ],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/kubernetes-helm-minikube",
+          "version": "2.1.0",
+          "name": "Kubernetes - Minikube-in-Docker",
+          "description": "Access an embedded minikube instance or remote a Kubernetes cluster from inside a dev container. Includes kubectl, Helm, minikube, and the Docker.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/kubernetes-helm-minikube",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "platforms": [
+            "Any"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [
+            "ghcr.io/devcontainers/features/docker-in-docker",
+            "ghcr.io/devcontainers/features/kubectl-helm-minikube"
+          ],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/markdown",
+          "version": "1.0.5",
+          "name": "Markdown",
+          "description": "A simple container for editing markdown.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/markdown",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "platforms": [
+            "Markdown"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/miniconda",
+          "version": "1.1.1",
+          "name": "Miniconda (Python 3)",
+          "description": "Develop Miniconda applications in Python 3. Installs dependencies from your environment.yml file and the Python extension.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/miniconda",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "platforms": [
+            "Python",
+            "Anaconda",
+            "Miniconda"
+          ],
+          "type": "dockerfile",
+          "fileCount": 6,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/miniconda-postgres",
+          "version": "1.1.3",
+          "name": "Miniconda & PostgreSQL (Python 3)",
+          "description": "Develop Miniconda & PostgreSQL applications in Python 3. Installs dependencies from your environment.yml file and the Python extension.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/miniconda-postgres",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "platforms": [
+            "Python",
+            "Anaconda",
+            "Miniconda"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 9,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/php",
+          "version": "1.2.1",
+          "name": "PHP",
+          "description": "Develop PHP based applications. Includes needed tools, extensions, and dependencies.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/php",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "PHP version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "8",
+                "8.2",
+                "8.1",
+                "8.0",
+                "8-bullseye",
+                "8.2-bullseye",
+                "8.1-bullseye",
+                "8.0-bullseye",
+                "8-buster",
+                "8.2-buster",
+                "8.1-buster",
+                "8.0-buster"
+              ],
+              "default": "8.2"
+            }
+          },
+          "platforms": [
+            "PHP"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/php-mariadb",
+          "version": "1.2.2",
+          "name": "PHP & MariaDB",
+          "description": "Develop PHP applications with MariaDB (MySQL Compatible).",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/php-mariadb",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "PHP version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "8",
+                "8.2",
+                "8.1",
+                "8.0",
+                "8-bullseye",
+                "8.2-bullseye",
+                "8.1-bullseye",
+                "8.0-bullseye",
+                "8-buster",
+                "8.2-buster",
+                "8.1-buster",
+                "8.0-buster"
+              ],
+              "default": "8.2"
+            }
+          },
+          "platforms": [
+            "PHP",
+            "MariaDB (MySQL Compatible)"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 6,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/postgres",
+          "version": "1.1.4",
+          "name": "Python 3 & PostgreSQL",
+          "description": "Develop applications with Python 3 and PostgreSQL. Includes a Python application container and PostgreSQL server.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/postgres",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Python version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "3",
+                "3.11",
+                "3.10",
+                "3.9",
+                "3.8",
+                "3.7",
+                "3.6",
+                "3-bullseye",
+                "3.11-bullseye",
+                "3.10-bullseye",
+                "3.9-bullseye",
+                "3.8-bullseye",
+                "3.7-bullseye",
+                "3.6-bullseye",
+                "3-buster",
+                "3.11-buster",
+                "3.10-buster",
+                "3.9-buster",
+                "3.8-buster",
+                "3.7-buster",
+                "3.6-buster"
+              ],
+              "default": "3.11"
+            }
+          },
+          "platforms": [
+            "Python"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 6,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/powershell",
+          "version": "1.1.0",
+          "name": "Powershell",
+          "description": "Develop PowerShell scripts without installing anything locally.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/powershell",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "platforms": [
+            "PowerShell"
+          ],
+          "type": "image",
+          "fileCount": 3,
+          "featureIds": [
+            "ghcr.io/devcontainers/features/common-utils"
+          ],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/python",
+          "version": "1.1.4",
+          "name": "Python 3",
+          "description": "Develop Python 3 applications.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/python",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Python version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "3",
+                "3.11",
+                "3.10",
+                "3.9",
+                "3.8",
+                "3.7",
+                "3.6",
+                "3-bullseye",
+                "3.11-bullseye",
+                "3.10-bullseye",
+                "3.9-bullseye",
+                "3.8-bullseye",
+                "3.7-bullseye",
+                "3.6-bullseye",
+                "3-buster",
+                "3.11-buster",
+                "3.10-buster",
+                "3.9-buster",
+                "3.8-buster",
+                "3.7-buster",
+                "3.6-buster"
+              ],
+              "default": "3.11"
+            }
+          },
+          "platforms": [
+            "Python"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/ruby",
+          "version": "1.1.3",
+          "name": "Ruby",
+          "description": "Develop Ruby based applications. includes everything you need to get up and running.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/ruby",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Ruby version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "3",
+                "3.1",
+                "3.0",
+                "2",
+                "2.7",
+                "3-bullseye",
+                "3.1-bullseye",
+                "3.0-bullseye",
+                "2-bullseye",
+                "2.7-bullseye",
+                "3-buster",
+                "3.1-buster",
+                "3.0-buster",
+                "2-buster",
+                "2.7-buster"
+              ],
+              "default": "3-bullseye"
+            }
+          },
+          "platforms": [
+            "Ruby"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/ruby-rails-postgres",
+          "version": "1.1.6",
+          "name": "Ruby on Rails & Postgres",
+          "description": "Develop Ruby on Rails applications with Postgres. Includes a Rails application container and PostgreSQL server.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/ruby-rails-postgres",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Ruby version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "3",
+                "3.1",
+                "3.0",
+                "2",
+                "2.7",
+                "2.6",
+                "3-bullseye",
+                "3.1-bullseye",
+                "3.0-bullseye",
+                "2-bullseye",
+                "2.7-bullseye",
+                "2.6-bullseye",
+                "3-buster",
+                "3.1-buster",
+                "3.0-buster",
+                "2-buster",
+                "2.7-buster",
+                "2.6-buster"
+              ],
+              "default": "3.1-bullseye"
+            }
+          },
+          "platforms": [
+            "Ruby"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 7,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/rust",
+          "version": "1.1.4",
+          "name": "Rust",
+          "description": "Develop Rust based applications. Includes appropriate runtime args and everything you need to get up and running.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/rust",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Debian OS version (use bullseye on local arm64/Apple Silicon):",
+              "proposals": [
+                "buster",
+                "bullseye"
+              ],
+              "default": "bullseye"
+            }
+          },
+          "platforms": [
+            "Rust"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/rust-postgres",
+          "version": "1.0.6",
+          "name": "Rust & PostgreSQL",
+          "description": "Develop applications with Rust and PostgreSQL. Includes a Rust application container and PostgreSQL server.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/rust-postgres",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Debian OS version (use bullseye on local arm64/Apple Silicon):",
+              "proposals": [
+                "buster",
+                "bullseye"
+              ],
+              "default": "bullseye"
+            }
+          },
+          "platforms": [
+            "Ruby"
+          ],
+          "type": "dockerCompose",
+          "fileCount": 8,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/typescript-node",
+          "version": "1.1.1",
+          "name": "Node.js & TypeScript",
+          "description": "Develop Node.js based applications in TypeScript. Includes Node.js, eslint, nvm, yarn, and the TypeScript compiler.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/typescript-node",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Node.js version (use -bullseye variants on local arm64/Apple Silicon):",
+              "proposals": [
+                "18",
+                "16",
+                "14",
+                "18-bullseye",
+                "16-bullseye",
+                "14-bullseye",
+                "18-buster",
+                "16-buster",
+                "14-buster"
+              ],
+              "default": "18"
+            }
+          },
+          "platforms": [
+            "Node.js",
+            "TypeScript"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/ubuntu",
+          "version": "1.0.5",
+          "name": "Ubuntu",
+          "description": "A simple Ubuntu container with Git and other common utilities installed.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/ubuntu",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "options": {
+            "imageVariant": {
+              "type": "string",
+              "description": "Ubuntu version (use ubuntu-22.04 or ubuntu-18.04 on local arm64/Apple Silicon):",
+              "proposals": [
+                "jammy",
+                "focal",
+                "bionic"
+              ],
+              "default": "jammy"
+            }
+          },
+          "platforms": [
+            "Any"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        },
+        {
+          "id": "ghcr.io/devcontainers/templates/universal",
+          "version": "1.0.5",
+          "name": "Default Linux Universal",
+          "description": "Use or extend the new Ubuntu-based default, large, multi-language universal container for GitHub Codespaces.",
+          "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/universal",
+          "publisher": "Dev Container Spec Maintainers",
+          "licenseURL": "https://github.com/devcontainers/templates/blob/main/LICENSE",
+          "platforms": [
+            "Python",
+            "Node.js",
+            "JavaScript",
+            "TypeScript",
+            "C++",
+            "Java",
+            "C#",
+            ".NET Core",
+            "PHP",
+            "Go",
+            "Ruby",
+            "Conda"
+          ],
+          "type": "image",
+          "fileCount": 4,
+          "featureIds": [],
+          "owner": "devcontainers"
+        }
+      ],
+      "features": []
+    },
+    {
+      "sourceInformation": {
+        "name": "Iterative Tools for Machine Learning Features",
+        "maintainer": "Iterative, Inc",
+        "contact": "https://github.com/iterative/features/issues",
+        "repository": "https://github.com/iterative/features",
+        "ociReference": "ghcr.io/iterative/features"
+      },
+      "features": [
+        {
+          "name": "Data Version Control",
+          "id": "ghcr.io/iterative/features/dvc",
+          "version": "1.0.4",
+          "description": "Installs DVC CLI deb package",
+          "options": {},
+          "documentationURL": "https://github.com/iterative/features",
+          "owner": "iterative",
+          "majorVersion": "1"
+        },
+        {
+          "name": "nvtop - GPUs Process monitoring",
+          "id": "ghcr.io/iterative/features/nvtop",
+          "version": "1.0.0",
+          "description": "Installs nvtop utility",
+          "options": {},
+          "documentationURL": "https://github.com/iterative/features",
+          "owner": "iterative",
+          "majorVersion": "1"
+        }
+      ],
+      "templates": []
+    },
+    {
+      "sourceInformation": {
+        "name": "Features by @joshspicer",
+        "maintainer": "Josh Spicer",
+        "contact": "https://github.com/joshspicer/features/issues",
+        "repository": "https://github.com/joshspicer/features",
+        "ociReference": "ghcr.io/joshspicer/features"
+      },
+      "features": [
+        {
+          "id": "ghcr.io/joshspicer/features/mitm-proxy",
+          "name": "mitmproxy https proxy",
+          "description": "mitmproxy is a free and open source, terminal-based interactive HTTP(S) proxy.",
+          "version": "1.0.3",
+          "options": {
+            "version": {
+              "type": "string",
+              "default": "latest",
+              "description": "Version of MITM proxy to install (auto-detects if 'latest'). See https://mitmproxy.org/downloads/ for available versions.",
+              "proposals": [
+                "latest",
+                "9.0.1"
+              ]
+            },
+            "installRootCerts": {
+              "type": "boolean",
+              "default": true,
+              "description": "Install root CA into system store (required to proxy HTTPS requests)."
+            }
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/python"
+          ],
+          "documentationURL": "https://github.com/joshspicer/features",
+          "owner": "joshspicer",
+          "majorVersion": "1"
+        },
+        {
+          "name": "OCI Container Utils",
+          "id": "ghcr.io/joshspicer/features/oci-utils",
+          "version": "1.0.4",
+          "description": "Installs useful CLI tools for working with OCI containers, namely skopeo and oras",
+          "options": {
+            "orasVersion": {
+              "type": "string",
+              "proposals": [
+                "0.15.1",
+                "0.16.0"
+              ],
+              "default": "0.16.0",
+              "description": "Version of oras to install.  See https://oras.land/cli for details.  Omit for the default pinned version."
+            },
+            "skopeoInstallSource": {
+              "type": "string",
+              "enum": [
+                "automatic",
+                "homebrew",
+                "apt",
+                "none"
+              ],
+              "default": "automatic",
+              "description": "Locations to attempt to install skopeo from.  Choosing 'automatic' will attempt to install from apt first, then homebrew. Choosing 'none' will skip installation."
+            }
+          },
+          "installsAfter": [
+            "ghcr.io/devcontainers/features/common-utils",
+            "ghcr.io/meaningful-ooo/devcontainer-features/homebrew"
+          ],
+          "documentationURL": "https://github.com/joshspicer/features",
+          "owner": "joshspicer",
+          "majorVersion": "1"
+        }
+      ],
+      "templates": []
+    }
+  ]
+}
