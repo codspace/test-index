@@ -2586,38 +2586,6 @@
     },
     {
       "sourceInformation": {
-        "name": "Iterative Tools for Machine Learning Features",
-        "maintainer": "Iterative, Inc",
-        "contact": "https://github.com/iterative/features/issues",
-        "repository": "https://github.com/iterative/features",
-        "ociReference": "ghcr.io/iterative/features"
-      },
-      "features": [
-        {
-          "name": "Data Version Control",
-          "id": "ghcr.io/iterative/features/dvc",
-          "version": "1.0.4",
-          "description": "Installs DVC CLI deb package",
-          "options": {},
-          "documentationURL": "https://github.com/iterative/features",
-          "owner": "iterative",
-          "majorVersion": "1"
-        },
-        {
-          "name": "nvtop - GPUs Process monitoring",
-          "id": "ghcr.io/iterative/features/nvtop",
-          "version": "1.0.0",
-          "description": "Installs nvtop utility",
-          "options": {},
-          "documentationURL": "https://github.com/iterative/features",
-          "owner": "iterative",
-          "majorVersion": "1"
-        }
-      ],
-      "templates": []
-    },
-    {
-      "sourceInformation": {
         "name": "Features by @joshspicer",
         "maintainer": "Josh Spicer",
         "contact": "https://github.com/joshspicer/features/issues",
